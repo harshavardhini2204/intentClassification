@@ -1,0 +1,6 @@
+flask
+numpy
+tensorflow
+nltk
+google-generativeai
+pickle-mixin
