@@ -1,3 +1,8 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  
+
 import pickle
 import numpy as np
 import tensorflow as tf
