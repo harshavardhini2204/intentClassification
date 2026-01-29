@@ -4,3 +4,4 @@ tensorflow
 nltk
 google-generativeai
 pickle-mixin
+streamlit

@@ -5,6 +5,13 @@ import google.generativeai as genai
 import nltk
 import os
 from nltk.stem import WordNetLemmatizer
+import nltk
+
+
+nltk.download('punkt', quiet=True)
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
 
 lemmatizer = WordNetLemmatizer()
 
@@ -14,14 +21,14 @@ genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
 
 def build_model(input_size, output_size):
     model = tf.keras.Sequential([
-        tf.keras.layers.Input(shape=(1036,)),   # len(words)
-        tf.keras.layers.Dense(384, activation='relu'),
-        tf.keras.layers.Dense(384, activation='relu'),   # matches dense_1 weights
-        tf.keras.layers.Dense(len(classes), activation='softmax')
+        tf.keras.layers.Input(shape=(input_size,)),
+        tf.keras.layers.Dense(384, activation="relu"),
+        tf.keras.layers.Dense(384, activation="relu"),
+        tf.keras.layers.Dense(output_size, activation="softmax")
     ])
-
     model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
     return model
+
 
 def load_assets():
     with open("words.pkl", "rb") as f:
@@ -79,7 +86,7 @@ def call_gemini(text, intent, confidence):
     system_prompt = build_system_prompt(intent, confidence)
 
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-2.5-flash",
         system_instruction=system_prompt
     )
 
