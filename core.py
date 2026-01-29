@@ -4,6 +4,9 @@ import tensorflow as tf
 import google.generativeai as genai
 import nltk
 import os
+from dotenv import load_dotenv
+
+load_dotenv() 
 from nltk.stem import WordNetLemmatizer
 import nltk
 
